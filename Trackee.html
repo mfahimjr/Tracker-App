@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trackee – Project Management ERP + CRM</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#f1f4f8;--card:#fff;--tx:#14213d;--mu:#5b6b82;--bd:#dbe2ec;--ac:#1d4ed8;--acs:#e8efff;--nav:#0b1f3a;--navt:#b9c6da;
+--s0:#16a34a;--s1:#d97706;--s2:#dc2626;--s3:#8696ad;--s4:#dde4ee;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--card:#111a2b;--tx:#e6ecf5;--mu:#8fa0b8;--bd:#223049;--ac:#5b8def;--acs:#16264a;--nav:#07111f;--s4:#26344b}}
+:root[data-theme="dark"]{--bg:#0b1220;--card:#111a2b;--tx:#e6ecf5;--mu:#8fa0b8;--bd:#223049;--ac:#5b8def;--acs:#16264a;--nav:#07111f;--s4:#26344b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 Inter,"Segoe UI",system-ui,sans-serif}
+h1,h2,h3,p{margin:0}h2{font-size:20px;font-weight:600}h3{font-size:14px;font-weight:600;margin-bottom:10px}.mu{color:var(--mu)}
+input,select,textarea,button{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:6px;padding:8px 10px;width:100%;margin:3px 0 8px}
+button{width:auto;cursor:pointer;margin:0;font-weight:500}button.p{background:var(--ac);color:#fff;border-color:var(--ac)}button.g{border:0;background:none;color:var(--ac);padding:2px 6px}button.d{color:#dc2626}
+label{font-size:12px;color:var(--mu);font-weight:500}
+.mk{display:inline-block;width:12px;height:12px;background:var(--ac);border-radius:2px;margin-right:9px}
+#gate{display:flex;min-height:100vh;align-items:center;justify-content:center;padding:16px}
+.box{background:var(--card);border:1px solid var(--bd);border-top:4px solid var(--ac);border-radius:8px;padding:28px;width:100%;max-width:380px}
+#app{display:none}
+nav{position:fixed;inset:0 auto 0 0;width:220px;background:var(--nav);padding:18px 12px;overflow:auto}
+nav .lo{font-size:18px;font-weight:700;color:#fff;margin:0 8px 22px;letter-spacing:.2px}
+nav a{display:block;padding:9px 12px;border-radius:6px;color:var(--navt);cursor:pointer;margin-bottom:2px;border-left:3px solid transparent}
+nav a:hover{color:#fff}nav a.on{background:rgba(255,255,255,.09);color:#fff;border-left-color:#5b8def;font-weight:600}
+main{margin-left:220px;padding:24px;max-width:1240px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:8px;padding-bottom:14px;border-bottom:1px solid var(--bd)}
+.me{display:flex;gap:10px;align-items:center;cursor:pointer}.av{width:34px;height:34px;border-radius:50%;background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;flex:none}.av.big{width:64px;height:64px;font-size:24px}
+.av img{width:100%;height:100%;border-radius:50%;object-fit:cover}.pf{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:18px;margin-bottom:16px}
+.hero{background:var(--nav);color:#fff;border:0;border-left:4px solid #5b8def}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:16px}.grid .card{margin:0}
+.kpi{font-size:26px;font-weight:700}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:520px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--bd);vertical-align:middle}th{color:var(--mu);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.ann{border-left:3px solid var(--ac);padding:9px 12px;background:var(--acs);border-radius:4px;margin-bottom:8px}
+.tag{padding:2px 9px;border-radius:4px;font-size:12px;color:#fff;white-space:nowrap}.tag.w{background:var(--s1)}
+.dot{display:inline-block;width:16px;height:16px;border-radius:4px}
+.mx th,.mx td{text-align:center;padding:8px 3px}.mx td:first-child,.mx th:first-child{text-align:left;min-width:130px}.mx th{font-size:10px;line-height:1.1;vertical-align:bottom;text-transform:none;letter-spacing:0}
+.lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;margin:12px 0 0}.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
+.row{display:flex;align-items:center;gap:8px;margin:6px 0}.row span{width:140px;flex:none;font-size:12px;text-align:right}.bar{display:flex;flex:1;height:14px;border-radius:3px;overflow:hidden;background:var(--s4)}
+.bar b{display:block}
+.bar-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px;flex-wrap:wrap}
+.fg{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}.fold{border:1px solid var(--bd);border-left:3px solid var(--ac);border-radius:6px;padding:14px;cursor:pointer;background:var(--card)}.fold:hover{background:var(--acs)}
+.ov{position:fixed;inset:0;background:rgba(7,17,31,.55);display:flex;align-items:center;justify-content:center;z-index:50;padding:12px}
+.md{background:var(--card);border-radius:8px;padding:22px;width:100%;max-width:480px;max-height:92vh;overflow:auto}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+#bub{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));height:44px;padding:0 18px;border-radius:22px;background:var(--ac);color:#fff;border:0;z-index:20}
+#chat{display:none;position:fixed;right:18px;bottom:calc(72px + env(safe-area-inset-bottom,0px));width:min(320px,calc(100vw - 36px));height:380px;background:var(--card);border:1px solid var(--bd);border-radius:8px;z-index:20;flex-direction:column;padding:12px}
+#msgs{flex:1;overflow:auto;font-size:13px}#msgs p{margin:6px 0;padding:6px 10px;border-radius:6px;background:var(--bg)}#msgs p.u{background:var(--ac);color:#fff;margin-left:30px}
+.dg{display:grid;gap:18px;grid-template-columns:minmax(0,2fr) minmax(240px,1fr);align-items:start}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:1px solid var(--bd);border-left:1px solid var(--bd)}.cal>div{border-right:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+.wd{padding:6px 4px;font-size:11px;font-weight:600;color:var(--mu);text-align:center;background:var(--bg)}
+.dy{min-height:88px;padding:4px;cursor:pointer;overflow:hidden}.dy:hover{background:var(--acs)}.dy.o{background:var(--bg);color:var(--mu)}.dy.sel{outline:2px solid var(--ac);outline-offset:-2px}
+.dn{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;font-size:12px;font-weight:600}.td .dn{background:var(--ac);color:#fff}
+.ev{display:block;font-size:10.5px;line-height:1.3;padding:1px 5px;margin-top:2px;border-radius:3px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ev.s{background:var(--acs);color:var(--ac);border-left:3px solid var(--ac)}.ev.m{background:none;color:var(--mu)}
+.li{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd)}
+.ev.t{background:var(--bg);color:var(--tx);border:1px solid var(--bd);border-left:3px solid var(--s1)}.ev.t.x{text-decoration:line-through;opacity:.7}
+a{color:var(--ac)}
+@media(max-width:760px){nav{position:static;width:auto;display:flex;overflow-x:auto;padding:8px}nav .lo{display:none}nav a{white-space:nowrap;border-left:0}main{margin:0;padding:14px}.row span{width:90px}.dg{grid-template-columns:1fr}.dy{min-height:54px}.ev{font-size:0;height:7px;width:7px;padding:0;border-radius:50%;display:inline-block;margin:2px 1px 0;border:0}.ev.s{background:var(--ac)}.ev.t{background:var(--mu);border:0}.ev.m{font-size:10px;width:auto;height:auto;border-radius:0}}
+</style>
+</head>
+<body>
+<div id="gate"><div class="box">
+<h1><span class="mk"></span>Trackee</h1><p class="mu" style="margin:4px 0 16px">Plan, track and deliver every project.</p>
+<label>Email</label><input id="em" value="aina@pepper.my"><label>Password</label><input id="pw" type="password" value="demo1234">
+<label>Sign in as (demo)</label><select id="role"><option>CEO</option><option selected>Admin</option><option>Staff</option></select>
+<button class="p" onclick="login()" style="width:100%">Log in</button>
+<p class="mu" style="font-size:12px;margin-top:10px">Demo only, no real authentication. Sign-up arrives with the Laravel build.</p></div></div>
+
+<div id="app"><nav id="nav"></nav>
+<main><div class="top"><h2 id="ttl"></h2><div class="me" onclick="go('profile')"><span id="who"></span><div class="av" id="av"></div></div></div><div id="view"></div></main>
+<button id="bub" onclick="tc()" aria-label="Chat">Assistant</button>
+<div id="chat"><h3>Trackee Assistant</h3><div id="msgs"><p>Hi! Ask me anything. The live version answers from the web via the backend.</p></div>
+<div style="display:flex;gap:6px"><input id="q" placeholder="Type a question…" onkeydown="if(event.key==='Enter')ask()" style="margin:0"><button class="p" onclick="ask()">Send</button></div></div>
+</div><div id="mod"></div>
+
+<script>
+const $=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ST=["POC Agreement","Fact Finding","Requirement Mapping","Workflow Presentation","Immersion","Solution Training","Finetuning","Lunch&Learn","Post L&L","CFA Paper"];
+const K=["Complete","In progress","On hold","Not started","Not set"];
+const SC=i=>`var(--s${i})`;
+const pad=n=>String(n).padStart(2,"0"),iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()),today=()=>iso(new Date()),mo=n=>{const t=new Date();return iso(new Date(t.getFullYear(),t.getMonth(),n))},pd=s=>{const[y,m,d]=s.split("-");return new Date(+y,m-1,+d)},daysTo=s=>Math.round((pd(s)-pd(today()))/864e5),fmt=s=>s?pd(s).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}):"-",done=p=>p.st.every(s=>s===0);
+const dlInfo=p=>{if(!p.dl)return{t:"No deadline",c:"var(--s3)"};if(done(p))return{t:"Completed",c:"var(--s0)"};const n=daysTo(p.dl),a=Math.abs(n),u=a===1?" day":" days";return n<0?{t:a+u+" overdue",c:"var(--s2)"}:n===0?{t:"Due today",c:"var(--s1)"}:{t:n+u+" left",c:n<=7?"var(--s1)":"var(--s3)"}};
+let me={name:"Aina Rahman",phone:"012-345 6789",email:"aina@pepper.my",role:"Admin",pic:null,np:{inbox:true,gmail:true,ann:true,inv:true,lead:"1 hour before"}},cur="dashboard",rel="Staff",od=null;
+const U=["Aina Rahman","Daniel Lee","Siti Noor"];
+let ann=[{t:"Lunch&Learn on 14 Nov",x:"Please confirm attendance with your project lead.",by:"Aina Rahman",ok:1},{t:"Q4 invoices",x:"Upload all signed invoices by 25 Nov.",by:"Daniel Lee",ok:0}];
+let proj=[{n:"Smart Complaint Agent",c:"Ministry A",sd:mo(3),dl:mo(33),st:[0,0,0,0,1,4,4,4,4,4],tk:[{t:"Confirm POC scope with client",who:"Aina Rahman",dl:mo(5),dn:true},{t:"Prepare workflow presentation deck",who:"Daniel Lee",dl:mo(14),dn:false},{t:"Book immersion session",who:"Aina Rahman",dl:mo(20),dn:false}]},{n:"Service Chatbot",c:"Agency B",sd:mo(1),dl:mo(31),st:[0,0,0,1,3,4,4,4,4,4],tk:[{t:"Send requirement mapping draft",who:"Daniel Lee",dl:mo(9),dn:false},{t:"Collect sample chat transcripts",who:"Siti Noor",dl:mo(12),dn:false}]},{n:"Document Intake",c:"Agency C",sd:mo(6),dl:mo(12),st:[0,2,3,3,4,4,4,4,4,4],tk:[{t:"Follow up on fact finding access",who:"Aina Rahman",dl:mo(-2),dn:false}]},{n:"Knowledge Search",c:"Ministry D",sd:mo(-14),dl:mo(30),st:[0,0,0,0,0,0,1,4,4,3],tk:[{t:"Finetuning review",who:"Daniel Lee",dl:mo(16),dn:false},{t:"Draft CFA paper outline",who:"Siti Noor",dl:mo(24),dn:false}]},{n:"Policy Summariser",c:"Agency E",sd:mo(21),dl:mo(50),st:[3,3,3,3,4,4,4,4,4,4],tk:[]}];
+let inv=[{no:"INV-0042",pr:"Service Chatbot",amt:18000,s:"Paid",f:{name:"inv-0042.pdf"}},{no:"INV-0043",pr:"Document Intake",amt:30200,s:"Overdue",f:null}];
+let dirs={n:"",fl:[],fo:[{n:"Organisation (All Staff)",fo:[],fl:[{name:"Staff-Handbook.pdf",note:"Applies to every staff member"}]},{n:"Operations",fo:[{n:"Templates",fo:[],fl:[]}],fl:[{name:"SOP-v1.pdf",note:"Onboarding steps"}]},{n:"Engineering",fo:[],fl:[]},{n:"Finance",fo:[],fl:[]},{n:"Inventory",fo:[],fl:[]},{n:"Documentation",fo:[],fl:[]},{n:"Artifacts",fo:[],fl:[]}]},dp=[];
+let rem=[{x:"Review Fact Finding notes",to:"Daniel Lee",w:"2026-11-03T09:00",g:true,by:"Aina Rahman"},{x:"Send draft CFA paper",to:"Aina Rahman",w:"2026-11-10T10:00",g:false,by:"Daniel Lee"}];
+let RL=[{g:"Staff",n:"Aina Rahman",d:"Project Lead",p:"012-345 6789",o:"Pepper Labs",e:"aina@pepper.my"},{g:"Staff",n:"Daniel Lee",d:"Engineer",p:"013-222 1100",o:"Pepper Labs",e:"daniel@pepper.my"},{g:"Partner",n:"Siti Noor",d:"Account Manager",p:"011-998 8776",o:"CloudCo",e:"siti@cloudco.my"},{g:"Client",n:"Dato’ Hamid",d:"Director",p:"019-887 6655",o:"Ministry A",e:"hamid@ministry-a.gov.my"},{g:"Client",n:"Puan Rosni",d:"IT Head",p:"016-554 4433",o:"Agency B",e:"rosni@agency-b.gov.my"}];
+const em=n=>(RL.find(r=>r.n===n)||{}).e||"";
+/* roles */
+const mgr=()=>me.role!=="Staff";
+/* shared helpers for leave, attendance, payroll */
+const off=n=>{const t=new Date();return iso(new Date(t.getFullYear(),t.getMonth(),t.getDate()+n))};
+const LT=["Annual","Medical","Unpaid","Replacement"],PD={Full:"Full day",AM:"AM",PM:"PM"},LTC={Annual:"var(--ac)",Medical:"var(--s2)",Unpaid:"var(--s3)",Replacement:"var(--s1)"},ltag=t=>`<span class="tag" style="background:${LTC[t]}">${t}</span>`;
+let leaves=[{who:"Daniel Lee",type:"Annual",from:off(-1),to:off(1),pd:"Full",why:"Family trip",f:null,rel:"Aina Rahman"},{who:"Siti Noor",type:"Medical",from:today(),to:today(),pd:"AM",why:"Clinic appointment",f:{name:"mc-slip.pdf"},rel:""},{who:"Aina Rahman",type:"Replacement",from:off(10),to:off(10),pd:"Full",why:"Replacement for weekend event",f:null,rel:"Daniel Lee"}],lD=today(),op=null;
+const PL={WFO:"Office",WFH:"Home",OnSite:"On site"},PC={WFO:"var(--ac)",WFH:"var(--s0)",OnSite:"var(--s1)"};
+const hm=t=>new Date(t).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}),dur=ms=>Math.floor(ms/36e5)+"h "+pad(Math.floor(ms%36e5/6e4))+"m",rm=n=>"RM "+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+let att=[],am=null;
+(()=>{let n=0,c=0;while(c<4){const d=new Date();d.setDate(d.getDate()-(++n));if(d.getDay()%6===0)continue;c++;[["Aina Rahman","WFO"],["Daniel Lee",c%2?"WFH":"WFO"],["Siti Noor","OnSite"]].forEach(([who,pl],k)=>{const a=new Date(d.getFullYear(),d.getMonth(),d.getDate(),8+k%2,15+c*7).getTime();att.push({who,pl,tin:a,tout:a+8.5*36e5+c*3e5,lat:+(3.139+k*.004).toFixed(5),lng:+(101.6869+c*.002).toFixed(5),demo:true})})}})();
+att.forEach(a=>{if(a.pl==="OnSite")a.link="https://www.google.com/maps?q="+a.lat+","+a.lng});
+const GM=/^https:\/\/(www\.)?(google\.[a-z.]+\/maps|maps\.google\.[a-z.]+|maps\.app\.goo\.gl|goo\.gl\/maps)/i;
+const PAY={"Aina Rahman":{b:6500,a:500},"Daniel Lee":{b:5200,a:300},"Siti Noor":{b:4800,a:300}};
+let pY=new Date().getFullYear(),pM="all",pE="all";
+const slip=(n,y,m)=>{const p=PAY[n],epf=Math.round(p.b*.11),so=40;return{n,y,m,b:p.b,a:p.a,epf,so,ded:epf+so,net:p.b+p.a-epf-so}};
+const NAV=[["dashboard","","Dashboard"],["projects","","Projects"],["leave","","Leave"],["attendance","","e-Attendance"],["payroll","","Payroll"],["relations","","Relations"],["billing","","Billing"],["directories","","Directories"]];
+const tagc=s=>({Paid:"var(--s0)",Overdue:"var(--s2)",Pending:"var(--s1)",Active:"var(--s0)",Paused:"var(--s1)",Cancelled:"var(--s3)",Completed:"var(--s0)",Failed:"var(--s2)",Income:"var(--s0)",Expense:"var(--s3)"}[s]||"var(--s3)");
+let sub=[{n:"Hosting plan",v:"CloudCo",amt:1200,cy:"Monthly",nx:off(12),s:"Active"},{n:"AI usage",v:"Anthropic",amt:650,cy:"Monthly",nx:off(12),s:"Active"},{n:"Design tool",v:"Figma",amt:1800,cy:"Yearly",nx:off(120),s:"Paused"}];
+let txn=[{d:off(-18),ds:"Payment received for INV-0042",pr:"Service Chatbot",ty:"Income",amt:18000,s:"Completed"},{d:off(-18),ds:"Hosting plan",pr:"General",ty:"Expense",amt:1200,s:"Completed"},{d:off(-18),ds:"AI usage",pr:"General",ty:"Expense",amt:650,s:"Completed"},{d:off(-2),ds:"Milestone payment, Document Intake",pr:"Document Intake",ty:"Income",amt:30200,s:"Pending"}];
+function login(){me.role=$("role").value;$("gate").style.display="none";$("app").style.display="block";go("dashboard")}
+function go(v){cur=v;if(v!=="directories")dp=[];if(v!=="projects")op=null;
+$("nav").innerHTML='<div class="lo"><span class="mk"></span>Trackee</div>'+NAV.map(n=>`<a class="${n[0]===v?"on":""}" onclick="go('${n[0]}')">${n[1]} ${n[2]}</a>`).join("");
+$("ttl").textContent=(NAV.find(n=>n[0]===v)||[0,0,"Profile"])[2];$("who").innerHTML=`<span class="mu">${esc(me.name)} · ${me.role}</span>`;$("av").innerHTML=avc();
+$("view").innerHTML=V[v]();if(v==="billing")calc()}
+const rr=()=>go(cur);
+function theme(){const r=document.documentElement;const d=r.dataset.theme==="dark"||(!r.dataset.theme&&matchMedia("(prefers-color-scheme:dark)").matches);r.dataset.theme=d?"light":"dark"}
+function logout(){$("app").style.display="none";$("gate").style.display="flex"}
+/* modal */
+function fld(f,v){const id="f_"+f.k,l=`<label>${f.l}</label>`;
+if(f.t==="stages")return l+`<div class="sg">${ST.map((s,i)=>`<div><label>${s}</label><select id="${id}${i}">${K.map((k,j)=>`<option value="${j}" ${(v?v[i]:4)==j?"selected":""}>${k}</option>`).join("")}</select></div>`).join("")}</div>`;
+if(f.t==="select")return l+`<select id="${id}">${f.o.map(o=>`<option ${o===v?"selected":""}>${esc(o)}</option>`).join("")}</select>`;
+if(f.t==="area")return l+`<textarea id="${id}" rows="3">${esc(v)}</textarea>`;
+if(f.t==="check")return `<label><input type="checkbox" id="${id}" style="width:auto" ${v?"checked":""}> ${f.l}</label><br>`;
+if(f.t==="file")return l+`<input type="file" id="${id}">${v?`<p class="mu" style="margin-bottom:8px">Current: ${esc(v.name)}</p>`:""}`;
+return l+`<input id="${id}" type="${f.t||"text"}" value="${esc(v)}">`}
+function modal(t,F,v,cb,lb){v=v||{};$("mod").innerHTML=`<div class="ov"><div class="md"><h2 style="margin-bottom:10px">${t}</h2>${F.map(f=>fld(f,v[f.k])).join("")}<div style="text-align:right;margin-top:8px"><button onclick="cm()">Cancel</button> <button class="p" id="sv">${lb||"Save"}</button></div></div></div>`;
+$("sv").onclick=()=>{const o={};F.forEach(f=>{const e=$("f_"+f.k);if(f.t==="stages")o[f.k]=ST.map((_,i)=>+$("f_"+f.k+i).value);else if(f.t==="file"){const x=e.files[0];o[f.k]=x?{name:x.name}:v[f.k]||null}else if(f.t==="check")o[f.k]=e.checked;else o[f.k]=e.value});if(cb(o)!==false){cm();rr()}}}
+const cm=()=>$("mod").innerHTML="";
+/* actions */
+const addAnn=()=>modal("New announcement",[{k:"t",l:"Title"},{k:"x",l:"Message",t:"area"}],{},o=>{if(!o.t)return false;ann.unshift({...o,by:me.name,ok:mgr()?1:0})});
+const apr=(i,y)=>{if(y)ann[i].ok=1;else ann.splice(i,1);rr()};
+const PF=[{k:"n",l:"Project name"},{k:"c",l:"Client / organisation"},{k:"sd",l:"Start date",t:"date"},{k:"dl",l:"Deadline",t:"date"},{k:"st",l:"Lifecycle status per stage",t:"stages"}];
+const ckP=o=>{if(!o.n)return false;if(o.sd&&o.dl&&o.dl<o.sd){alert("The deadline cannot be before the start date.");return false}};
+const addP=()=>modal("New project",PF,{sd:today()},o=>{if(ckP(o)===false)return false;proj.push({...o,tk:[]})});
+const edP=i=>modal("Edit project",PF,proj[i],o=>{if(ckP(o)===false)return false;proj[i]={...proj[i],...o}});
+const IF=[{k:"no",l:"Invoice no."},{k:"pr",l:"Project",t:"select",o:()=>0},{k:"amt",l:"Amount (RM)",t:"number"},{k:"s",l:"Status",t:"select",o:["Pending","Paid","Overdue"]},{k:"f",l:"Invoice file (PDF/image)",t:"file"}];
+const ifs=()=>{IF[1].o=proj.map(p=>p.n);return IF};
+const addI=()=>modal("New invoice",ifs(),{},o=>{o.amt=+o.amt;inv.push(o)});
+const edI=i=>modal("Edit invoice",ifs(),inv[i],o=>{o.amt=+o.amt;inv[i]=o});
+const delI=i=>{inv.splice(i,1);rr()};
+const cd=()=>dp.reduce((n,k)=>n.fo.find(f=>f.n===k)||n,dirs),fcnt=n=>n.fl.length+n.fo.reduce((a,f)=>a+fcnt(f),0);
+const opD=i=>{dp.push(cd().fo[i].n);rr()};
+const ckN=(o,skip)=>{o.n=(o.n||"").trim();if(!o.n)return false;if(cd().fo.some((f,j)=>j!==skip&&f.n.toLowerCase()===o.n.toLowerCase())){alert("A folder with this name already exists here.");return false}};
+const newD=()=>modal("New folder",[{k:"n",l:"Folder name"}],{},o=>{if(ckN(o)===false)return false;cd().fo.push({n:o.n,fo:[],fl:[]})});
+const renD=i=>modal("Rename folder",[{k:"n",l:"Folder name"}],{n:cd().fo[i].n},o=>{if(ckN(o,i)===false)return false;cd().fo[i].n=o.n});
+const delD=i=>{const f=cd().fo[i];if(!confirm((fcnt(f)||f.fo.length)?'Delete "'+f.n+'" and everything inside it?':'Delete the empty folder "'+f.n+'"?'))return;cd().fo.splice(i,1);rr()};
+const upF=()=>modal("Upload file",[{k:"f",l:"File",t:"file"},{k:"note",l:"Description / documentation note",t:"area"}],{},o=>{if(!o.f)return false;cd().fl.push({name:o.f.name,note:o.note})});
+const edF=i=>modal("Edit file",[{k:"name",l:"File name"},{k:"note",l:"Description",t:"area"}],cd().fl[i],o=>{cd().fl[i]=o});
+const delF=i=>{cd().fl.splice(i,1);rr()};
+/* subscriptions & transactions */
+const SF=[{k:"n",l:"Subscription"},{k:"v",l:"Vendor"},{k:"amt",l:"Amount (RM)",t:"number"},{k:"cy",l:"Billing cycle",t:"select",o:["Monthly","Quarterly","Yearly"]},{k:"nx",l:"Next billing date",t:"date"},{k:"s",l:"Status",t:"select",o:["Active","Paused","Cancelled"]}];
+const addS=()=>modal("New subscription",SF,{cy:"Monthly",s:"Active",nx:today()},o=>{if(!o.n)return false;o.amt=+o.amt||0;sub.push(o)});
+const edS=i=>modal("Edit subscription",SF,sub[i],o=>{if(!o.n)return false;o.amt=+o.amt||0;sub[i]=o});
+const delS=i=>{sub.splice(i,1);rr()};
+const XF=[{k:"d",l:"Date",t:"date"},{k:"ds",l:"Description"},{k:"pr",l:"Project",t:"select",o:[]},{k:"ty",l:"Type",t:"select",o:["Income","Expense"]},{k:"amt",l:"Amount (RM)",t:"number"},{k:"s",l:"Status",t:"select",o:["Completed","Pending","Failed"]}];
+const xfs=()=>{XF[2].o=["General",...proj.map(p=>p.n)];return XF};
+const addX=()=>modal("New transaction",xfs(),{d:today(),ty:"Income",s:"Completed",pr:"General"},o=>{if(!o.ds)return false;o.amt=+o.amt||0;txn.push(o)});
+const edX=i=>modal("Edit transaction",xfs(),txn[i],o=>{if(!o.ds)return false;o.amt=+o.amt||0;txn[i]=o});
+const delX=i=>{txn.splice(i,1);rr()};
+const RF=[{k:"x",l:"Reminder"},{k:"to",l:"Send to",t:"select",o:U},{k:"w",l:"When",t:"datetime-local"},{k:"g",l:"Also send via Gmail",t:"check"}];
+const addR=()=>modal("Set reminder",RF,{to:me.name},o=>{if(!o.x)return false;rem.push({...o,by:me.name})});
+const edR=i=>modal("Edit reminder",RF,rem[i],o=>{rem[i]={...rem[i],...o}});
+const delR=i=>{rem.splice(i,1);rr()};
+const RLF=[{k:"g",l:"Group",t:"select",o:["Staff","Partner","Client"]},{k:"n",l:"Name"},{k:"d",l:"Designation"},{k:"p",l:"Contact number"},{k:"o",l:"Organisation"},{k:"e",l:"Email",t:"email"}];
+const addRL=()=>modal("Add contact",RLF,{g:rel},o=>{if(!o.n)return false;RL.push(o);rel=o.g});
+const edRL=i=>modal("Edit contact",RLF,RL[i],o=>{RL[i]=o;rel=o.g});
+const delRL=i=>{RL.splice(i,1);rr()};
+/* action items */
+const TF=[{k:"t",l:"Action item"},{k:"who",l:"Owner",t:"select",o:U},{k:"dl",l:"Due date",t:"date"},{k:"dn",l:"Completed",t:"check"}];
+const opT=i=>{op=i;go("projects")};
+const addT=()=>modal("New action item",TF,{who:me.name,dl:"",dn:false},o=>{if(!o.t)return false;proj[op].tk=proj[op].tk||[];proj[op].tk.push(o)});
+const edT=i=>modal("Edit action item",TF,proj[op].tk[i],o=>{if(!o.t)return false;proj[op].tk[i]=o});
+const delT=i=>{proj[op].tk.splice(i,1);rr()};
+const tgT=(i,v)=>{proj[op].tk[i].dn=v;rr()};
+/* leave */
+const LF=[{k:"type",l:"Leave type",t:"select",o:LT},{k:"from",l:"From",t:"date"},{k:"to",l:"To",t:"date"},{k:"pd",l:"Period",t:"select",o:["Full","AM","PM"]},{k:"why",l:"Reason",t:"area"},{k:"f",l:"Attachment (optional)",t:"file"},{k:"rel",l:"Relief person (optional)",t:"select",o:[]}];
+const lfs=()=>{LF[6].o=["None",...U.filter(n=>n!==me.name)];return LF};
+const fixL=o=>({...o,rel:o.rel==="None"?"":o.rel});
+const ckL=o=>{if(!o.from||!o.to){alert("Choose the leave dates.");return false}if(o.to<o.from){alert("The end date cannot be before the start date.");return false}if(o.pd!=="Full"&&o.from!==o.to){alert("AM or PM leave must be a single day.");return false}};
+const addL=()=>modal("Apply for leave",lfs(),{from:today(),to:today(),pd:"Full",rel:"None"},o=>{if(ckL(o)===false)return false;leaves.push({...fixL(o),who:me.name})},"Submit");
+const edL=i=>modal("Edit leave",lfs(),{...leaves[i],rel:leaves[i].rel||"None"},o=>{if(ckL(o)===false)return false;leaves[i]={...leaves[i],...fixL(o)}});
+const delL=i=>{leaves.splice(i,1);rr()};
+const lSet=v=>{if(v){lD=v;rr()}},lGo=n=>{const d=pd(lD);d.setDate(d.getDate()+n);lD=iso(d);rr()};
+/* e-attendance */
+const getPos=()=>new Promise(r=>{const d=()=>r({lat:3.139,lng:101.6869,demo:true});if(!navigator.geolocation)return d();navigator.geolocation.getCurrentPosition(p=>r({lat:+p.coords.latitude.toFixed(5),lng:+p.coords.longitude.toFixed(5)}),d,{timeout:4000})});
+async function clockIn(){const pl=$("pl").value,ln=($("ml").value||"").trim(),b=$("ci");if(pl==="OnSite"&&!ln){alert("Paste the Google Maps link of your on-site location.");return}if(ln&&!GM.test(ln)){alert("Enter a valid Google Maps link, for example https://maps.app.goo.gl/...");return}b.disabled=true;b.textContent="Locating…";const g=await getPos();if(!att.some(a=>a.who===me.name&&!a.tout)){const a={who:me.name,pl,tin:Date.now(),tout:null,link:ln,...g};att.push(a);am=a}rr()}
+const clockOut=()=>{const a=att.find(x=>x.who===me.name&&!x.tout);if(a){a.tout=Date.now();am=a}rr()};
+const mapSVG=()=>`<svg viewBox="0 0 300 180" style="width:100%;border-radius:6px;border:1px solid var(--bd);display:block" role="img" aria-label="Map showing the clock-in location"><rect width="300" height="180" style="fill:var(--bg)"/><g style="stroke:var(--bd);fill:none"><path d="M0 120 L300 70" stroke-width="7"/><path d="M90 0 L130 180" stroke-width="7"/><path d="M200 0 L180 180" stroke-width="5"/><path d="M0 40 L300 150" stroke-width="3"/></g><circle cx="150" cy="100" r="24" style="fill:var(--ac)" opacity=".18"/><g transform="translate(150 100)"><path d="M0 0 C-14 -16 -14 -36 0 -36 C14 -36 14 -16 0 0Z" style="fill:var(--s2)"/><circle cy="-24" r="5" fill="#fff"/></g></svg>`;
+/* payroll */
+function psl(n,y,m){const s=slip(n,y,m),r=(a,b)=>`<tr><td>${a}</td><td style="text-align:right">${b}</td></tr>`,w=window.open("","_blank");if(!w){alert("Allow pop-ups to open the payslip.");return}
+w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Payslip – ${esc(n)} – ${MN[m]} ${y}</title><style>body{font:14px/1.5 Inter,"Segoe UI",system-ui,sans-serif;max-width:560px;margin:32px auto;padding:0 16px;color:#14213d}h1{font-size:20px;margin:0}table{width:100%;border-collapse:collapse;margin:8px 0 18px}td{padding:7px 4px;border-bottom:1px solid #dbe2ec}h3{margin:18px 0 0;font-size:13px;text-transform:uppercase;color:#5b6b82}.n td{font-weight:700;font-size:16px;border-bottom:0}button{padding:8px 14px}@media print{button{display:none}}</style></head><body><h1>Trackee · Payslip</h1><p style="color:#5b6b82">${MN[m]} ${y}</p><p><b>${esc(n)}</b></p><h3>Earnings</h3><table>${r("Basic salary",rm(s.b))}${r("Allowances",rm(s.a))}</table><h3>Deductions</h3><table>${r("EPF (11%)",rm(s.epf))}${r("SOCSO &amp; EIS",rm(s.so))}</table><table class="n">${r("Net pay",rm(s.net))}</table><p style="color:#5b6b82;font-size:12px">Sample payslip generated by the Trackee demo. Figures are illustrative only.</p><button onclick="print()">Print / Save as PDF</button></body></html>`);w.document.close()}
+
+const gm=i=>{const r=i==null?{}:rem[i];modal("Send via Gmail",[{k:"to",l:"To (email)",t:"email"},{k:"su",l:"Subject"},{k:"bd",l:"Message",t:"area"}],{to:em(r.to),su:r.x?"Reminder: "+r.x:"",bd:r.x?"Hi "+r.to+",\n\nReminder: "+r.x+"\nDue: "+r.w.replace("T"," ")+"\n\nFrom "+me.name:""},o=>{if(!o.to)return false;window.open("https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(o.to)+"&su="+encodeURIComponent(o.su)+"&body="+encodeURIComponent(o.bd),"_blank");if(i!=null)rem[i].sent=true},"Open in Gmail")};
+const avc=()=>me.pic?`<img src="${me.pic}" alt="">`:esc(me.name[0]);
+function setPic(el){const f=el.files[0];if(!f)return;if(!f.type.startsWith("image/")||f.size>2e6){alert("Choose an image under 2 MB.");return}const fr=new FileReader();fr.onload=()=>{me.pic=fr.result;rr()};fr.readAsDataURL(f)}
+const edAll=()=>modal("Edit profile",[{k:"name",l:"Full name"},{k:"phone",l:"Mobile phone"},{k:"email",l:"Email",t:"email"}],me,o=>{if(!o.name)return false;Object.assign(me,o)});
+const edOne=(k,l)=>modal("Edit "+l.toLowerCase(),[{k,l,t:k==="email"?"email":"text"}],me,o=>{if(!o[k])return false;me[k]=o[k]});
+/* views */
+const lg='<div class="lg">'+K.map((k,i)=>`<span><i style="background:${SC(i)}"></i>${k}</span>`).join("")+"</div>";
+const cnt=i=>proj.filter(p=>p.st.includes(i)).length;
+const MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+let cY=new Date().getFullYear(),cM=new Date().getMonth(),cD=today(),cF="all";
+const evs=s=>{const r=[];proj.forEach((p,i)=>{if(cF!=="all"&&+cF!==i)return;if(p.dl===s)r.push({k:"d",p,i});if(p.sd===s)r.push({k:"s",p,i});(p.tk||[]).forEach(t=>{if(t.dl===s)r.push({k:"t",p,i,t})})});return r};
+const chip=e=>e.k==="t"?`<span class="ev t${e.t.dn?" x":""}" title="Action item: ${esc(e.t.t)} (${esc(e.p.n)})">Task · ${esc(e.t.t)}</span>`:e.k==="s"?`<span class="ev s" title="Start: ${esc(e.p.n)}">Start · ${esc(e.p.n)}</span>`:`<span class="ev" style="background:${dlInfo(e.p).c}" title="Deadline: ${esc(e.p.n)} (${dlInfo(e.p).t})">Due · ${esc(e.p.n)}</span>`;
+const li=(k,p,i,s,a)=>`<div class="li"><div>${k}<b>${esc(p.n)}</b><br><span class="mu" style="font-size:12px">${s}</span></div><button class="g" onclick="${a||`edP(${i})`}">${a?"Open tasks":"Edit dates"}</button></div>`;
+const evLi=e=>e.k==="t"?li(`<span class="tag" style="background:var(--s1)">Task</span> `,{n:e.t.t},e.i,esc(e.p.n)+" · "+esc(e.t.who)+(e.t.dn?" · done":""),`opT(${e.i})`):li(`<span class="tag" style="background:${e.k==="s"?"var(--ac)":dlInfo(e.p).c}">${e.k==="s"?"Start":"Deadline"}</span> `,e.p,e.i,esc(e.p.c)+(e.k==="d"?" · "+dlInfo(e.p).t:""));
+function calHTML(){const f=new Date(cY,cM,1),ld=(f.getDay()+6)%7,n=Math.ceil((ld+new Date(cY,cM+1,0).getDate())/7)*7,T=today();let c="";
+for(let k=0;k<n;k++){const d=new Date(cY,cM,1-ld+k),s=iso(d),e=evs(s);c+=`<div class="dy${d.getMonth()!==cM?" o":""}${s===T?" td":""}${s===cD?" sel":""}" role="button" tabindex="0" aria-label="${fmt(s)}, ${e.length} events" onclick="calSel('${s}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();calSel('${s}')}"><span class="dn">${d.getDate()}</span>${e.slice(0,2).map(chip).join("")}${e.length>2?`<span class="ev m">+${e.length-2} more</span>`:""}</div>`}
+const up=proj.map((p,i)=>({p,i})).filter(x=>x.p.dl&&!done(x.p)&&(cF==="all"||+cF===x.i)).sort((a,b)=>a.p.dl.localeCompare(b.p.dl)).slice(0,6),sel=evs(cD);
+return `<div class="dg"><div><div class="bar-h"><h3 style="margin:0">Project calendar · ${MN[cM]} ${cY}</h3><div style="display:flex;gap:6px;flex-wrap:wrap"><select aria-label="Filter by project" style="width:auto;margin:0" onchange="cF=this.value;calRef()"><option value="all">All projects</option>${proj.map((p,i)=>`<option value="${i}" ${cF==i?"selected":""}>${esc(p.n)}</option>`).join("")}</select><button onclick="calGo(-1)" aria-label="Previous month">‹</button><button onclick="calGo(0)">Today</button><button onclick="calGo(1)" aria-label="Next month">›</button></div></div>
+<div class="cal">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(w=>`<div class="wd">${w}</div>`).join("")}${c}</div>
+<div class="lg"><span><i style="background:var(--ac)"></i>Start</span><span><i style="background:var(--bg);border:1px solid var(--bd);border-left:3px solid var(--s1)"></i>Action item due</span><span><i style="background:var(--s0)"></i>Deadline, completed</span><span><i style="background:var(--s3)"></i>Deadline, later</span><span><i style="background:var(--s1)"></i>Due within 7 days</span><span><i style="background:var(--s2)"></i>Overdue</span></div></div>
+<div><h3>${fmt(cD)}${cD===T?" (today)":""}</h3>${sel.length?sel.map(evLi).join(""):'<p class="mu">No start dates, deadlines or action items on this day.</p>'}
+<h3 style="margin-top:16px">Upcoming deadlines</h3>${up.length?up.map(x=>li(`<span class="tag" style="background:${dlInfo(x.p).c}">${dlInfo(x.p).t}</span> `,x.p,x.i,fmt(x.p.dl)+" · "+esc(x.p.c))).join(""):'<p class="mu">No open deadlines.</p>'}</div></div>`}
+const calRef=()=>{$("calw").innerHTML=calHTML()},calSel=s=>{cD=s;calRef()};
+const calGo=n=>{if(!n){const t=new Date();cY=t.getFullYear();cM=t.getMonth();cD=today()}else{const d=new Date(cY,cM+n,1);cY=d.getFullYear();cM=d.getMonth()}calRef()};
+const calShow=i=>{const s=proj[i].dl||proj[i].sd;if(s){const d=pd(s);cY=d.getFullYear();cM=d.getMonth();cD=s;cF="all"}go("dashboard")};
+const V={
+dashboard(){const vis=ann.map((a,i)=>({...a,i})).filter(a=>a.ok||mgr()||a.by===me.name);
+const ov=proj.filter(p=>p.dl&&!done(p)&&daysTo(p.dl)<0).length,dw=proj.filter(p=>p.dl&&!done(p)&&daysTo(p.dl)>=0&&daysTo(p.dl)<=7).length;const stN=s=>{const n=K.map((_,k)=>proj.filter(p=>p.st[s]===k).length);return n};
+return `<div class="card hero"><h2>Welcome to Trackee, ${esc(me.name.split(" ")[0])}!</h2><p style="opacity:.9">${proj.length} projects in the pipeline. ${ov} overdue, ${dw} due in the next 7 days.</p></div>
+<div class="card"><div class="bar-h"><h3 style="margin:0"> Announcements</h3><button class="p" onclick="addAnn()">+ Announce</button></div>
+${vis.length?vis.map(a=>`<div class="ann"><b>${esc(a.t)}</b> ${a.ok?"":'<span class="tag w">Pending approval</span>'}<br>${esc(a.x)}<br><span class="mu" style="font-size:12px">by ${esc(a.by)}</span>${!a.ok&&mgr()?` <button class="g" onclick="apr(${a.i},1)">Approve</button><button class="g d" onclick="apr(${a.i},0)">Reject</button>`:""}</div>`).join(""):'<p class="mu">No announcements.</p>'}
+<p class="mu" style="font-size:12px">Anyone can post. Announcements go live after an admin approves.</p></div>
+<div class="grid"><div class="card"><div class="mu">Projects</div><div class="kpi">${proj.length}</div></div>
+<div class="card"><div class="mu">In progress</div><div class="kpi">${proj.filter(p=>p.st.includes(1)).length}</div></div>
+<div class="card"><div class="mu">On hold</div><div class="kpi">${cnt(2)}</div></div>
+<div class="card"><div class="mu">Outstanding billing</div><div class="kpi">RM ${inv.filter(i=>i.s!=="Paid").reduce((a,b)=>a+b.amt,0).toLocaleString()}</div></div></div>
+<div class="card" id="calw">${calHTML()}</div>
+<div class="card"><h3>Project lifecycle</h3><p class="mu" style="margin-bottom:8px">Each row is a project, each column a stage of the POC pipeline.</p>
+<div class="wrap"><table class="mx" style="min-width:680px"><tr><th>Project</th>${ST.map(s=>`<th>${s.replace(" ","<br>")}</th>`).join("")}</tr>
+${proj.map(p=>`<tr><td><b>${esc(p.n)}</b></td>${p.st.map((s,i)=>`<td><span class="dot" title="${ST[i]}: ${K[s]}" style="background:${SC(s)}"></span></td>`).join("")}</tr>`).join("")}</table></div>${lg}</div>
+<div class="card"><h3>Stage summary (all projects)</h3>${ST.map((s,i)=>`<div class="row"><span>${s}</span><div class="bar">${stN(i).map((n,k)=>`<b title="${K[k]}: ${n}" style="width:${n/proj.length*100}%;background:${SC(k)}"></b>`).join("")}</div></div>`).join("")}</div>`},
+projects(){if(op!=null&&proj[op]){const p=proj[op],t=p.tk||[],d=t.filter(x=>x.dn).length;return `<div class="bar-h"><div><button class="g" onclick="op=null;rr()">← Projects</button> <b>${esc(p.n)}</b> <span class="mu">· ${d}/${t.length} done</span></div><button class="p" onclick="addT()">+ Action item</button></div><div class="bar" style="margin-bottom:12px;flex:none"><b style="width:${t.length?d/t.length*100:0}%;background:var(--s0)"></b></div><div class="card wrap"><table style="min-width:640px"><tr><th></th><th>Action item</th><th>Owner</th><th>Due</th><th>Status</th><th></th></tr>${t.length?t.map((x,i)=>{const st=x.dn?["Done","var(--s0)"]:x.dl&&daysTo(x.dl)<0?["Overdue","var(--s2)"]:["Open","var(--s3)"];return `<tr><td><input type="checkbox" style="width:18px;height:18px;margin:0" ${x.dn?"checked":""} onchange="tgT(${i},this.checked)" aria-label="Mark done"></td><td>${esc(x.t)}</td><td>${esc(x.who)}</td><td>${fmt(x.dl)}</td><td><span class="tag" style="background:${st[1]}">${st[0]}</span></td><td><button class="g" onclick="edT(${i})">Edit</button><button class="g d" onclick="delT(${i})">Delete</button></td></tr>`}).join(""):'<tr><td colspan="6" class="mu">No action items yet. Add the first one.</td></tr>'}</table></div>`}
+return `<div class="bar-h"><p class="mu">Track what needs doing for every project. Start dates, deadlines and action item due dates appear on the dashboard calendar.</p><button class="p" onclick="addP()">+ New project</button></div><div class="card wrap"><table style="min-width:1000px"><tr><th>Project</th><th>Client</th><th>Start</th><th>Deadline</th><th>Time left</th><th>Now at</th><th>Status</th><th>Action items</th><th></th></tr>
+${proj.map((p,i)=>{let k=p.st.findIndex(s=>s===1||s===2);if(k<0)k=p.st.findIndex(s=>s>=3);if(k<0)k=9;const t=p.tk||[];return `<tr><td><b>${esc(p.n)}</b></td><td>${esc(p.c)}</td><td>${fmt(p.sd)}</td><td>${fmt(p.dl)}</td><td><span class="tag" style="background:${dlInfo(p).c}">${dlInfo(p).t}</span></td><td>${ST[k]}</td><td><span class="tag" style="background:${SC(p.st[k])}">${K[p.st[k]]}</span></td><td><button class="g" onclick="opT(${i})">${t.filter(x=>x.dn).length}/${t.length} done</button></td><td><button class="g" onclick="edP(${i})">Edit</button><button class="g" onclick="calShow(${i})">Calendar</button></td></tr>`}).join("")}</table></div>`},
+leave(){const rows=leaves.map((l,i)=>({...l,i})).filter(l=>mgr()||l.who===me.name),R=leaves.filter(l=>l.from<=lD&&lD<=l.to);
+return `<div class="bar-h"><p class="mu">Apply for leave and see who is away each day.</p><button class="p" onclick="addL()">+ Apply for leave</button></div>
+<div class="card wrap"><div class="bar-h"><h3 style="margin:0">Daily leave roster · ${fmt(lD)}${lD===today()?" (today)":""}</h3><div style="display:flex;gap:6px;flex-wrap:wrap"><button onclick="lGo(-1)" aria-label="Previous day">‹</button><input type="date" aria-label="Roster date" value="${lD}" onchange="lSet(this.value)" style="width:auto;margin:0"><button onclick="lGo(1)" aria-label="Next day">›</button><button onclick="lSet(today())">Today</button></div></div>
+<table style="min-width:520px"><tr><th>Employee</th><th>Type</th><th>Period</th><th>Relief person</th></tr>${R.length?R.map(l=>`<tr><td><b>${esc(l.who)}</b></td><td>${ltag(l.type)}</td><td>${PD[l.pd]}</td><td>${esc(l.rel)||'<span class="mu">-</span>'}</td></tr>`).join(""):'<tr><td colspan="4" class="mu">No one is on leave this day.</td></tr>'}</table></div>
+<div class="card wrap"><h3>${mgr()?"All leave applications":"My leave applications"}</h3><table style="min-width:760px"><tr>${mgr()?"<th>Employee</th>":""}<th>Type</th><th>Dates</th><th>Period</th><th>Reason</th><th>Attachment</th><th>Relief person</th><th></th></tr>${rows.length?rows.map(l=>`<tr>${mgr()?`<td>${esc(l.who)}</td>`:""}<td>${ltag(l.type)}</td><td>${l.from===l.to?fmt(l.from):fmt(l.from)+" – "+fmt(l.to)}</td><td>${PD[l.pd]}</td><td>${esc(l.why)}</td><td>${l.f?esc(l.f.name):'<span class="mu">none</span>'}</td><td>${esc(l.rel)||'<span class="mu">-</span>'}</td><td>${l.who===me.name?`<button class="g" onclick="edL(${l.i})">Edit</button><button class="g d" onclick="delL(${l.i})">Delete</button>`:""}</td></tr>`).join(""):`<tr><td colspan="${mgr()?8:7}" class="mu">No applications yet.</td></tr>`}</table></div>`},
+attendance(){const s=att.find(a=>a.who===me.name&&!a.tout),T=today(),hrs=att.filter(a=>a.who===me.name&&iso(new Date(a.tin))===T).reduce((x,a)=>x+((a.tout||Date.now())-a.tin),0),rows=att.map((a,i)=>({...a,i})).filter(a=>mgr()||a.who===me.name).sort((x,y)=>y.tin-x.tin),m=am&&att.includes(am)?am:(s||rows[0]);
+return `<div class="grid"><div class="card"><div class="mu">Status</div><div class="kpi" style="font-size:18px">${s?"Clocked in":"Clocked out"}</div></div><div class="card"><div class="mu">Working place</div><div class="kpi" style="font-size:18px">${s?PL[s.pl]:"-"}</div></div><div class="card"><div class="mu">Hours today</div><div class="kpi">${dur(hrs)}</div></div></div>
+<div class="dg"><div><div class="card"><h3>Clock in / out</h3>${s?`<p style="margin-bottom:10px">Clocked in at <b>${hm(s.tin)}</b> · ${PL[s.pl]}${s.link?` · <a href="${esc(s.link)}" target="_blank" rel="noopener">Location</a>`:""}</p><button class="p" onclick="clockOut()">Clock out</button>`:`<label>Working place</label><select id="pl">${Object.keys(PL).map(k=>`<option value="${k}">${PL[k]}</option>`).join("")}</select><label>Location (Google Maps link)</label><input id="ml" placeholder="https://maps.app.goo.gl/..."><p class="mu" style="font-size:12px;margin:-4px 0 10px">Required for On site. Optional for Office and Home.</p><button class="p" id="ci" onclick="clockIn()">Clock in</button><p class="mu" style="font-size:12px;margin-top:8px">Your location is recorded when you clock in. If location access is blocked, a demo location is used.</p>`}</div>
+<div class="card wrap"><h3>Attendance history</h3><table style="min-width:760px"><tr>${mgr()?"<th>Employee</th>":""}<th>Date</th><th>Place</th><th>Location</th><th>In</th><th>Out</th><th>Duration</th><th></th></tr>${rows.length?rows.map(a=>`<tr>${mgr()?`<td>${esc(a.who)}</td>`:""}<td>${fmt(iso(new Date(a.tin)))}</td><td><span class="tag" style="background:${PC[a.pl]}">${PL[a.pl]}</span></td><td>${a.link?`<a href="${esc(a.link)}" target="_blank" rel="noopener">Google Maps</a>`:'<span class="mu">-</span>'}</td><td>${hm(a.tin)}</td><td>${a.tout?hm(a.tout):'<span class="tag" style="background:var(--s0)">Active</span>'}</td><td>${dur((a.tout||Date.now())-a.tin)}</td><td><button class="g" onclick="am=att[${a.i}];rr()">Map</button></td></tr>`).join(""):'<tr><td colspan="8" class="mu">No attendance yet.</td></tr>'}</table></div></div>
+<div class="card"><h3>Location</h3>${m?mapSVG()+`<p style="margin-top:8px"><b>${esc(m.who)}</b> · ${fmt(iso(new Date(m.tin)))} ${hm(m.tin)} · ${PL[m.pl]}</p><p class="mu" style="font-size:12px">${m.lat}, ${m.lng}${m.demo?" (demo location)":""}</p><p style="margin-top:6px"><a href="${m.link?esc(m.link):`https://www.google.com/maps?q=${m.lat},${m.lng}`}" target="_blank" rel="noopener">Open in Google Maps</a></p>`:'<p class="mu">Clock in to record a location.</p>'}</div></div>`},
+payroll(){const T=new Date(),Y=T.getFullYear(),maxM=pY<Y?11:T.getMonth(),names=mgr()?(pE==="all"?Object.keys(PAY):[pE]):[me.name].filter(n=>PAY[n]),ms=pM==="all"?[...Array(maxM+1).keys()]:(+pM<=maxM?[+pM]:[]),list=[];
+names.forEach(n=>ms.forEach(m=>list.push(slip(n,pY,m))));list.sort((a,b)=>b.m-a.m||a.n.localeCompare(b.n));
+return `<div class="bar-h"><p class="mu">Filter by year and month, then open a sample payslip.</p><div style="display:flex;gap:6px;flex-wrap:wrap">${mgr()?`<select aria-label="Employee" style="width:auto;margin:0" onchange="pE=this.value;rr()"><option value="all" ${pE==="all"?"selected":""}>All employees</option>${Object.keys(PAY).map(n=>`<option ${pE===n?"selected":""}>${esc(n)}</option>`).join("")}</select>`:""}<select aria-label="Year" style="width:auto;margin:0" onchange="pY=+this.value;rr()">${[Y,Y-1].map(y=>`<option ${pY===y?"selected":""}>${y}</option>`).join("")}</select><select aria-label="Month" style="width:auto;margin:0" onchange="pM=this.value;rr()"><option value="all" ${pM==="all"?"selected":""}>All months</option>${MN.map((m,i)=>`<option value="${i}" ${pM===String(i)?"selected":""}>${m}</option>`).join("")}</select></div></div>
+<div class="card wrap"><table style="min-width:640px"><tr><th>Period</th>${mgr()?"<th>Employee</th>":""}<th>Basic</th><th>Allowances</th><th>Deductions</th><th>Net pay</th><th></th></tr>${list.length?list.map(x=>`<tr><td>${MN[x.m]} ${x.y}</td>${mgr()?`<td>${esc(x.n)}</td>`:""}<td>${rm(x.b)}</td><td>${rm(x.a)}</td><td>${rm(x.ded)}</td><td><b>${rm(x.net)}</b></td><td><button class="g" onclick="psl('${esc(x.n)}',${x.y},${x.m})">Payslip</button></td></tr>`).join(""):`<tr><td colspan="${mgr()?7:6}" class="mu">No payslips for this selection.</td></tr>`}</table>${list.length?`<p class="mu" style="margin-top:10px">Total net pay for this selection: <b>${rm(list.reduce((a,x)=>a+x.net,0))}</b>. Sample figures only.</p>`:""}</div>`},
+relations(){const rows=RL.map((r,i)=>({...r,i})).filter(r=>r.g===rel);return `<div class="bar-h"><div>${["Staff","Partner","Client"].map(k=>`<button class="${k===rel?"p":""}" onclick="rel='${k}';rr()">${k}</button> `).join("")}</div><button class="p" onclick="addRL()">Add contact</button></div><div class="card wrap"><table><tr><th>Name</th><th>Designation</th><th>Contact</th><th>Organisation</th><th>Email</th><th></th></tr>${rows.length?rows.map(r=>`<tr><td><b>${esc(r.n)}</b></td><td>${esc(r.d)}</td><td>${esc(r.p)}</td><td>${esc(r.o)}</td><td>${esc(r.e)}</td><td><button class="g" onclick="edRL(${r.i})">Edit</button><button class="g d" onclick="delRL(${r.i})">Delete</button></td></tr>`).join(""):'<tr><td colspan="6" class="mu">No contacts yet.</td></tr>'}</table></div>`},
+billing(){const sm=sub.filter(x=>x.s==="Active").reduce((a,x)=>a+x.amt/({Monthly:1,Quarterly:3,Yearly:12}[x.cy]||1),0),tx=txn.map((t,i)=>({...t,i})).sort((a,b)=>b.d.localeCompare(a.d));return `<div class="bar-h"><p class="mu">Invoices, subscriptions, transactions and costing.</p></div><div class="card wrap"><div class="bar-h"><h3 style="margin:0">Invoices</h3><button class="p" onclick="addI()">+ Add invoice</button></div><table><tr><th>No.</th><th>Project</th><th>Amount</th><th>File</th><th>Status</th><th></th></tr>
+${inv.map((v,i)=>`<tr><td>${esc(v.no)}</td><td>${esc(v.pr)}</td><td>RM ${(+v.amt).toLocaleString()}</td><td>${v.f?" "+esc(v.f.name):'<span class="mu">none</span>'}</td><td><span class="tag" style="background:${tagc(v.s)}">${v.s}</span></td><td><button class="g" onclick="edI(${i})">Edit</button><button class="g d" onclick="delI(${i})">Delete</button></td></tr>`).join("")}</table>
+<div class="bar-h" style="margin-top:28px"><h3 style="margin:0">Subscriptions</h3><button class="p" onclick="addS()">+ Add subscription</button></div><table style="min-width:680px"><tr><th>Subscription</th><th>Vendor</th><th>Amount</th><th>Cycle</th><th>Next billing</th><th>Status</th><th></th></tr>${sub.length?sub.map((x,i)=>`<tr><td><b>${esc(x.n)}</b></td><td>${esc(x.v)||'<span class="mu">-</span>'}</td><td>${rm(+x.amt)}</td><td>${esc(x.cy)}</td><td>${fmt(x.nx)}</td><td><span class="tag" style="background:${tagc(x.s)}">${esc(x.s)}</span></td><td><button class="g" onclick="edS(${i})">Edit</button><button class="g d" onclick="delS(${i})">Delete</button></td></tr>`).join(""):'<tr><td colspan="7" class="mu">No subscriptions yet.</td></tr>'}</table><p class="mu" style="margin-top:10px">Active subscriptions cost about <b>${rm(sm)}</b> per month.</p>
+<div class="bar-h" style="margin-top:28px"><h3 style="margin:0">Transactions</h3><button class="p" onclick="addX()">+ Add transaction</button></div><table style="min-width:760px"><tr><th>Date</th><th>Description</th><th>Project</th><th>Type</th><th>Amount</th><th>Status</th><th></th></tr>${tx.length?tx.map(t=>`<tr><td>${fmt(t.d)}</td><td>${esc(t.ds)}</td><td>${esc(t.pr)}</td><td><span class="tag" style="background:${tagc(t.ty)}">${esc(t.ty)}</span></td><td>${t.ty==="Expense"?"- ":"+ "}${rm(+t.amt)}</td><td><span class="tag" style="background:${tagc(t.s)}">${esc(t.s)}</span></td><td><button class="g" onclick="edX(${t.i})">Edit</button><button class="g d" onclick="delX(${t.i})">Delete</button></td></tr>`).join(""):'<tr><td colspan="7" class="mu">No transactions yet.</td></tr>'}</table></div>
+<div class="card wrap"><h3>Costing calculator</h3><div style="display:grid;gap:0 14px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))"><div><label>Man-days</label><input id="h" type="number" value="20" oninput="calc()"></div><div><label>Rate (RM/day)</label><input id="r" type="number" value="900" oninput="calc()"></div><div><label>Other costs (RM)</label><input id="o" type="number" value="2000" oninput="calc()"></div></div><div class="mu" style="margin-top:6px">Total</div><div class="kpi" id="tot"></div></div>`},
+directories(){const n=cd(),cr='<button class="g" onclick="dp=[];rr()">Directories</button>'+dp.map((k,j)=>' / <button class="g" onclick="dp=dp.slice(0,'+(j+1)+');rr()">'+esc(k)+'</button>').join("");
+return `<div class="bar-h"><div>${dp.length?'<button class="g" onclick="dp.pop();rr()">← Up</button> ':""}${cr}</div><div><button onclick="newD()">+ New folder</button> <button class="p" onclick="upF()">Upload file</button></div></div>
+<div class="card wrap"><table><tr><th>Name</th><th>Description</th><th></th></tr>${n.fo.length||n.fl.length?n.fo.map((f,i)=>`<tr><td><a href="#" onclick="opD(${i});return false"><b>${esc(f.n)}</b></a></td><td class="mu">${f.fo.length} folders · ${fcnt(f)} files</td><td><button class="g" onclick="renD(${i})">Rename</button><button class="g d" onclick="delD(${i})">Delete</button></td></tr>`).join("")+n.fl.map((x,i)=>`<tr><td>${esc(x.name)}</td><td>${esc(x.note)}</td><td><button class="g" onclick="edF(${i})">Edit</button><button class="g d" onclick="delF(${i})">Delete</button></td></tr>`).join(""):'<tr><td colspan="3" class="mu">Empty. Create a folder or upload a file.</td></tr>'}</table></div>`},
+notif(){const mine=rem.map((r,i)=>({...r,i})).filter(r=>r.to===me.name&&me.np.inbox);
+return `<div class="card"><h3>Inbox</h3>${mine.length?mine.map(r=>`<div class="ann"><b>${esc(r.x)}</b><br><span class="mu" style="font-size:12px">from ${esc(r.by)} · ${esc(r.w.replace("T"," "))}</span></div>`).join(""):'<p class="mu">Nothing for you.</p>'}<div class="ann"><b>INV-0043 is overdue</b></div></div>
+<div class="bar-h"><h3 style="margin:0">Reminders</h3><div><button onclick="gm()">Compose Gmail</button> <button class="p" onclick="addR()">Set reminder</button></div></div><div class="card wrap"><table><tr><th>Reminder</th><th>To</th><th>When</th><th>Gmail</th><th></th></tr>${rem.map((r,i)=>`<tr><td>${esc(r.x)}</td><td>${esc(r.to)}</td><td>${esc(r.w.replace("T"," "))}</td><td>${r.sent?"Sent":r.g?"Scheduled":"-"}</td><td><button class="g" onclick="gm(${i})">Send Gmail</button><button class="g" onclick="edR(${i})">Edit</button><button class="g d" onclick="delR(${i})">Delete</button></td></tr>`).join("")}</table></div>`},
+profile(){const rows=[["Full name","name"],["Mobile phone","phone"],["Email","email"]];
+return `<div class="card pf"><div class="av big">${avc()}</div><div style="flex:1"><h2>${esc(me.name)}</h2><p class="mu">${me.role} · ${esc(me.email)}</p></div><div><button onclick="$('pic').click()">Change photo</button> ${me.pic?'<button class="g d" onclick="me.pic=null;rr()">Remove</button>':""} <button class="p" onclick="edAll()">Edit profile</button></div><input type="file" id="pic" accept="image/*" hidden onchange="setPic(this)"></div>
+<div class="card"><h3>Personal information</h3><div class="wrap"><table style="min-width:0">${rows.map(r=>`<tr><td class="mu" style="width:140px">${r[0]}</td><td>${esc(me[r[1]])}</td><td style="text-align:right"><button class="g" onclick="edOne('${r[1]}','${r[0]}')">Edit</button></td></tr>`).join("")}<tr><td class="mu">Role</td><td>${me.role}</td><td></td></tr></table></div></div>
+<div class="card"><h3>Notification settings</h3>${[["inbox","In-app inbox alerts","Show reminders and alerts assigned to you"],["gmail","Email me via Gmail","Receive reminders in your email"],["ann","Announcement updates","New announcements and approval decisions"],["inv","Billing alerts","Overdue and newly added invoices"]].map(n=>`<div class="bar-h"><div>${n[1]}<br><span class="mu">${n[2]}</span></div><input type="checkbox" style="width:18px;height:18px;margin:0" ${me.np[n[0]]?"checked":""} onchange="me.np['${n[0]}']=this.checked"></div>`).join("")}<label>Remind me</label><select onchange="me.np.lead=this.value">${["At due time","1 hour before","1 day before"].map(o=>`<option ${me.np.lead===o?"selected":""}>${o}</option>`).join("")}</select></div>
+${V.notif()}
+<div class="card"><h3>Preferences</h3><div class="bar-h"><div>Theme<br><span class="mu">Switch between light and dark</span></div><button onclick="theme()">Switch theme</button></div><div class="bar-h"><div>Session<br><span class="mu">Sign out of this device</span></div><button class="d" onclick="logout()">Log out</button></div></div>`}};
+function calc(){$("tot").textContent="RM "+((+$("h").value)*(+$("r").value)+(+$("o").value)).toLocaleString()}
+function tc(){const c=$("chat");c.style.display=c.style.display==="flex"?"none":"flex"}
+function ask(){const q=$("q").value.trim();if(!q)return;const u=document.createElement("p");u.className="u";u.textContent=q;const a=document.createElement("p");a.textContent="Mock reply. The live version searches the web through the backend and cites sources.";$("msgs").append(u,a);$("q").value="";$("msgs").scrollTop=1e5}
+</script>
+</body>
+</html>
