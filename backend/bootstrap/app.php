@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Cookie-based session auth for the first-party SPA (spec 7.2, Sanctum).
         $middleware->statefulApi();
+
+        // The SPA has no login page to redirect to, so guests get a 401 instead of a redirect.
+        $middleware->redirectGuestsTo(fn () => null);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

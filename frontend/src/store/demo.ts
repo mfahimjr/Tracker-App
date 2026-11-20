@@ -1,4 +1,4 @@
-// Demo content ported from the prototype (Trackee.html). Replaced by API data as each module ships.
+// Demo content ported from the prototype (Tracker.html). Replaced by API data as each module ships.
 import { dayOfMonth, offsetDate, toSen } from '../lib/format'
 import type { AppData, AttendanceRecord, Profile } from './types'
 

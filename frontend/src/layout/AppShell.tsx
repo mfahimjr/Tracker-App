@@ -28,7 +28,7 @@ export function AppShell() {
           <span className="grid size-9 place-items-center rounded-xl bg-linear-to-br from-indigo-400 to-violet-600 text-sm font-bold text-white shadow-pop">
             T
           </span>
-          <span className="text-lg font-semibold tracking-tight text-white">Trackee</span>
+          <span className="text-lg font-semibold tracking-tight text-white">Tracker</span>
         </div>
         <p className="mb-2 px-3 text-[11px] font-semibold tracking-wider text-navt/70 uppercase">Menu</p>
         {navFor(me.role).map((item) => (
@@ -52,7 +52,7 @@ export function AppShell() {
       <main className="p-4 md:ml-60 md:p-8">
         <header className="sticky top-0 z-10 -mx-4 mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-bd bg-bg/80 px-4 py-3.5 backdrop-blur md:-mx-8 md:px-8">
           <div>
-            <p className="text-xs font-medium text-mu">Trackee</p>
+            <p className="text-xs font-medium text-mu">Tracker</p>
             <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
           </div>
           <div className="flex items-center gap-3">

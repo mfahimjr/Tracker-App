@@ -32,7 +32,7 @@ export function LoginPage() {
         <div className="absolute -bottom-32 -left-16 size-96 rounded-full bg-black/10 blur-2xl" />
         <div className="relative flex items-center gap-2.5">
           <span className="grid size-10 place-items-center rounded-xl bg-white/20 text-base font-bold backdrop-blur">T</span>
-          <span className="text-xl font-semibold tracking-tight">Trackee</span>
+          <span className="text-xl font-semibold tracking-tight">Tracker</span>
         </div>
         <div className="relative max-w-md">
           <h1 className="text-4xl leading-tight font-bold tracking-tight">Plan, track and deliver every project.</h1>
@@ -49,7 +49,7 @@ export function LoginPage() {
             <span className="grid size-9 place-items-center rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">
               T
             </span>
-            <span className="text-lg font-semibold tracking-tight">Trackee</span>
+            <span className="text-lg font-semibold tracking-tight">Tracker</span>
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Welcome back</h2>
           <p className="mt-1 mb-7 text-sm text-mu">Sign in with your work email.</p>

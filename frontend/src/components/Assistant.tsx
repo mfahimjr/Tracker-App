@@ -37,7 +37,7 @@ export function Assistant() {
       </button>
       {open && (
         <div className="fixed right-4.5 bottom-18 z-20 flex h-96 w-[min(320px,calc(100vw-36px))] flex-col rounded-lg border border-bd bg-card p-3 shadow-xl">
-          <h3 className="mb-2 text-sm font-semibold">Trackee Assistant</h3>
+          <h3 className="mb-2 text-sm font-semibold">Tracker Assistant</h3>
           <div className="flex-1 overflow-auto text-sm" aria-live="polite">
             {messages.map((m, i) => (
               <p

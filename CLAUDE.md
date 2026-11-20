@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This directory holds design and specification material, not a buildable project yet:
 
-- `Trackee.html` is a single-file UI prototype (inline CSS and JS, no build step, no tests). It is the design reference for the real app, not code to port. It uses global state, a mock login with a demo role picker, and mock AI replies.
-- `Trackee Product Requirements, MVP Roadmap and Build Guide.docx` is the authoritative spec: requirements (F1 to F24 with MoSCoW priority and phases), data model, API outline, security checklist, and phased roadmap.
+- `Tracker.html` is a single-file UI prototype (inline CSS and JS, no build step, no tests). It is the design reference for the real app, not code to port. It uses global state, a mock login with a demo role picker, and mock AI replies.
+- `Tracker Product Requirements, MVP Roadmap and Build Guide.docx` is the authoritative spec: requirements (F1 to F24 with MoSCoW priority and phases), data model, API outline, security checklist, and phased roadmap.
 
 Build work has started (Phase 0): `frontend/` and `backend/`. PHP 8.4 and Composer are installed at `%LOCALAPPDATA%\Programs\composer` and the WinGet PHP folder; restart the terminal if `php` or `composer` are not found.
 
@@ -20,7 +20,7 @@ Frontend commands (run from `frontend/`):
 
 Backend commands (run from `backend/`, Laravel 13, PHP 8.4):
 
-- Local database is MySQL, as set in `backend/.env` (`DB_CONNECTION=mysql`, database `trackee`, `root` on `127.0.0.1:3306` with no password). Start the MySQL server before the API. On this machine it is XAMPP's MariaDB 10.4 (`C:\xampp\mysql\bin\mysqld.exe`, data in `C:\xampp\mysql\data`), which the `.env` settings also work with.
+- Local database is MySQL, as set in `backend/.env` (`DB_CONNECTION=mysql`, database `tracker`, `root` on `127.0.0.1:3306` with no password). Start the MySQL server before the API. On this machine it is XAMPP's MariaDB 10.4 (`C:\xampp\mysql\bin\mysqld.exe`, data in `C:\xampp\mysql\data`), which the `.env` settings also work with.
 - `composer install`, then `php artisan migrate:fresh --seed` for a local database.
 - `php artisan serve --port=8000`: the API that Vite proxies to.
 - `php artisan test` (or `php vendor/bin/phpunit`): PHPUnit feature tests in `tests/Feature`.
@@ -36,7 +36,7 @@ frontend/src/
   auth/         AuthProvider, context, useAuth; session comes from GET /api/me
   config/       lifecycle stages and statuses, nav with role gating
   lib/          date and money helpers (format.ts), shared constants
-  store/        demo data for every module (demo.ts, ported from Trackee.html)
+  store/        demo data for every module (demo.ts, ported from Tracker.html)
                 DataProvider holds it in memory; useData/useMe read it
   features/     module logic: projects (deadlines, dialogs), dashboard calendar, directory tree
   components/   UI primitives (ui.tsx), FormDialog (schema-driven form modal), Assistant
@@ -54,7 +54,7 @@ Backend so far: Sanctum session auth (`bootstrap/app.php` enables `statefulApi()
 Overall repo layout (docker folder not created yet):
 
 ```
-trackee/
+tracker/
   backend/   Laravel app (routes/api.php, database/migrations)
   frontend/  React + Vite + TypeScript (src/pages, src/components, src/api, src/hooks)
   docker/    Dockerfiles, nginx.conf
@@ -79,7 +79,7 @@ Backend conventions: thin controllers, Form Request validation, Policy classes f
 
 ## Working on the prototype
 
-If you edit `Trackee.html`, keep it self-contained: inline CSS and JS, CSS custom properties on `:root` with a dark theme under both `prefers-color-scheme` and `[data-theme="dark"]`. Don't add new `alert()` or `confirm()` calls; the spec replaces them with real dialogs and toasts.
+If you edit `Tracker.html`, keep it self-contained: inline CSS and JS, CSS custom properties on `:root` with a dark theme under both `prefers-color-scheme` and `[data-theme="dark"]`. Don't add new `alert()` or `confirm()` calls; the spec replaces them with real dialogs and toasts.
 
 Gaps against the spec that remain after the port (the React port fixes the others):
 - Staff can open every project, contact, and directory in the UI. Only leave and attendance filter by role. The server must enforce access once APIs exist.
@@ -90,4 +90,4 @@ Fixed in the port: Billing is hidden from Staff, `alert`/`confirm` are replaced 
 
 ## Open decisions
 
-Section 12 of the spec lists unresolved questions that affect the data model and permissions. Check them before building: single vs. multi-company (decides whether `company_id` goes on every table now), whether Staff can see billing, who approves leave, whether payroll is generated in Trackee or only displayed, and the email path (Gmail OAuth vs. SMTP).
+Section 12 of the spec lists unresolved questions that affect the data model and permissions. Check them before building: single vs. multi-company (decides whether `company_id` goes on every table now), whether Staff can see billing, who approves leave, whether payroll is generated in Tracker or only displayed, and the email path (Gmail OAuth vs. SMTP).

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Trackee – Project Management ERP + CRM</title>
+<title>Tracker – Project Management ERP + CRM</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
 :root{--bg:#f1f4f8;--card:#fff;--tx:#14213d;--mu:#5b6b82;--bd:#dbe2ec;--ac:#1d4ed8;--acs:#e8efff;--nav:#0b1f3a;--navt:#b9c6da;
@@ -63,7 +63,7 @@ a{color:var(--ac)}
 </head>
 <body>
 <div id="gate"><div class="box">
-<h1><span class="mk"></span>Trackee</h1><p class="mu" style="margin:4px 0 16px">Plan, track and deliver every project.</p>
+<h1><span class="mk"></span>Tracker</h1><p class="mu" style="margin:4px 0 16px">Plan, track and deliver every project.</p>
 <label>Email</label><input id="em" value="aina@pepper.my"><label>Password</label><input id="pw" type="password" value="demo1234">
 <label>Sign in as (demo)</label><select id="role"><option>CEO</option><option selected>Admin</option><option>Staff</option></select>
 <button class="p" onclick="login()" style="width:100%">Log in</button>
@@ -72,7 +72,7 @@ a{color:var(--ac)}
 <div id="app"><nav id="nav"></nav>
 <main><div class="top"><h2 id="ttl"></h2><div class="me" onclick="go('profile')"><span id="who"></span><div class="av" id="av"></div></div></div><div id="view"></div></main>
 <button id="bub" onclick="tc()" aria-label="Chat">Assistant</button>
-<div id="chat"><h3>Trackee Assistant</h3><div id="msgs"><p>Hi! Ask me anything. The live version answers from the web via the backend.</p></div>
+<div id="chat"><h3>Tracker Assistant</h3><div id="msgs"><p>Hi! Ask me anything. The live version answers from the web via the backend.</p></div>
 <div style="display:flex;gap:6px"><input id="q" placeholder="Type a question…" onkeydown="if(event.key==='Enter')ask()" style="margin:0"><button class="p" onclick="ask()">Send</button></div></div>
 </div><div id="mod"></div>
 
@@ -113,7 +113,7 @@ let sub=[{n:"Hosting plan",v:"CloudCo",amt:1200,cy:"Monthly",nx:off(12),s:"Activ
 let txn=[{d:off(-18),ds:"Payment received for INV-0042",pr:"Service Chatbot",ty:"Income",amt:18000,s:"Completed"},{d:off(-18),ds:"Hosting plan",pr:"General",ty:"Expense",amt:1200,s:"Completed"},{d:off(-18),ds:"AI usage",pr:"General",ty:"Expense",amt:650,s:"Completed"},{d:off(-2),ds:"Milestone payment, Document Intake",pr:"Document Intake",ty:"Income",amt:30200,s:"Pending"}];
 function login(){me.role=$("role").value;$("gate").style.display="none";$("app").style.display="block";go("dashboard")}
 function go(v){cur=v;if(v!=="directories")dp=[];if(v!=="projects")op=null;
-$("nav").innerHTML='<div class="lo"><span class="mk"></span>Trackee</div>'+NAV.map(n=>`<a class="${n[0]===v?"on":""}" onclick="go('${n[0]}')">${n[1]} ${n[2]}</a>`).join("");
+$("nav").innerHTML='<div class="lo"><span class="mk"></span>Tracker</div>'+NAV.map(n=>`<a class="${n[0]===v?"on":""}" onclick="go('${n[0]}')">${n[1]} ${n[2]}</a>`).join("");
 $("ttl").textContent=(NAV.find(n=>n[0]===v)||[0,0,"Profile"])[2];$("who").innerHTML=`<span class="mu">${esc(me.name)} · ${me.role}</span>`;$("av").innerHTML=avc();
 $("view").innerHTML=V[v]();if(v==="billing")calc()}
 const rr=()=>go(cur);
@@ -192,7 +192,7 @@ const clockOut=()=>{const a=att.find(x=>x.who===me.name&&!x.tout);if(a){a.tout=D
 const mapSVG=()=>`<svg viewBox="0 0 300 180" style="width:100%;border-radius:6px;border:1px solid var(--bd);display:block" role="img" aria-label="Map showing the clock-in location"><rect width="300" height="180" style="fill:var(--bg)"/><g style="stroke:var(--bd);fill:none"><path d="M0 120 L300 70" stroke-width="7"/><path d="M90 0 L130 180" stroke-width="7"/><path d="M200 0 L180 180" stroke-width="5"/><path d="M0 40 L300 150" stroke-width="3"/></g><circle cx="150" cy="100" r="24" style="fill:var(--ac)" opacity=".18"/><g transform="translate(150 100)"><path d="M0 0 C-14 -16 -14 -36 0 -36 C14 -36 14 -16 0 0Z" style="fill:var(--s2)"/><circle cy="-24" r="5" fill="#fff"/></g></svg>`;
 /* payroll */
 function psl(n,y,m){const s=slip(n,y,m),r=(a,b)=>`<tr><td>${a}</td><td style="text-align:right">${b}</td></tr>`,w=window.open("","_blank");if(!w){alert("Allow pop-ups to open the payslip.");return}
-w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Payslip – ${esc(n)} – ${MN[m]} ${y}</title><style>body{font:14px/1.5 Inter,"Segoe UI",system-ui,sans-serif;max-width:560px;margin:32px auto;padding:0 16px;color:#14213d}h1{font-size:20px;margin:0}table{width:100%;border-collapse:collapse;margin:8px 0 18px}td{padding:7px 4px;border-bottom:1px solid #dbe2ec}h3{margin:18px 0 0;font-size:13px;text-transform:uppercase;color:#5b6b82}.n td{font-weight:700;font-size:16px;border-bottom:0}button{padding:8px 14px}@media print{button{display:none}}</style></head><body><h1>Trackee · Payslip</h1><p style="color:#5b6b82">${MN[m]} ${y}</p><p><b>${esc(n)}</b></p><h3>Earnings</h3><table>${r("Basic salary",rm(s.b))}${r("Allowances",rm(s.a))}</table><h3>Deductions</h3><table>${r("EPF (11%)",rm(s.epf))}${r("SOCSO &amp; EIS",rm(s.so))}</table><table class="n">${r("Net pay",rm(s.net))}</table><p style="color:#5b6b82;font-size:12px">Sample payslip generated by the Trackee demo. Figures are illustrative only.</p><button onclick="print()">Print / Save as PDF</button></body></html>`);w.document.close()}
+w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Payslip – ${esc(n)} – ${MN[m]} ${y}</title><style>body{font:14px/1.5 Inter,"Segoe UI",system-ui,sans-serif;max-width:560px;margin:32px auto;padding:0 16px;color:#14213d}h1{font-size:20px;margin:0}table{width:100%;border-collapse:collapse;margin:8px 0 18px}td{padding:7px 4px;border-bottom:1px solid #dbe2ec}h3{margin:18px 0 0;font-size:13px;text-transform:uppercase;color:#5b6b82}.n td{font-weight:700;font-size:16px;border-bottom:0}button{padding:8px 14px}@media print{button{display:none}}</style></head><body><h1>Tracker · Payslip</h1><p style="color:#5b6b82">${MN[m]} ${y}</p><p><b>${esc(n)}</b></p><h3>Earnings</h3><table>${r("Basic salary",rm(s.b))}${r("Allowances",rm(s.a))}</table><h3>Deductions</h3><table>${r("EPF (11%)",rm(s.epf))}${r("SOCSO &amp; EIS",rm(s.so))}</table><table class="n">${r("Net pay",rm(s.net))}</table><p style="color:#5b6b82;font-size:12px">Sample payslip generated by the Tracker demo. Figures are illustrative only.</p><button onclick="print()">Print / Save as PDF</button></body></html>`);w.document.close()}
 
 const gm=i=>{const r=i==null?{}:rem[i];modal("Send via Gmail",[{k:"to",l:"To (email)",t:"email"},{k:"su",l:"Subject"},{k:"bd",l:"Message",t:"area"}],{to:em(r.to),su:r.x?"Reminder: "+r.x:"",bd:r.x?"Hi "+r.to+",\n\nReminder: "+r.x+"\nDue: "+r.w.replace("T"," ")+"\n\nFrom "+me.name:""},o=>{if(!o.to)return false;window.open("https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(o.to)+"&su="+encodeURIComponent(o.su)+"&body="+encodeURIComponent(o.bd),"_blank");if(i!=null)rem[i].sent=true},"Open in Gmail")};
 const avc=()=>me.pic?`<img src="${me.pic}" alt="">`:esc(me.name[0]);
@@ -222,7 +222,7 @@ const calShow=i=>{const s=proj[i].dl||proj[i].sd;if(s){const d=pd(s);cY=d.getFul
 const V={
 dashboard(){const vis=ann.map((a,i)=>({...a,i})).filter(a=>a.ok||mgr()||a.by===me.name);
 const ov=proj.filter(p=>p.dl&&!done(p)&&daysTo(p.dl)<0).length,dw=proj.filter(p=>p.dl&&!done(p)&&daysTo(p.dl)>=0&&daysTo(p.dl)<=7).length;const stN=s=>{const n=K.map((_,k)=>proj.filter(p=>p.st[s]===k).length);return n};
-return `<div class="card hero"><h2>Welcome to Trackee, ${esc(me.name.split(" ")[0])}!</h2><p style="opacity:.9">${proj.length} projects in the pipeline. ${ov} overdue, ${dw} due in the next 7 days.</p></div>
+return `<div class="card hero"><h2>Welcome to Tracker, ${esc(me.name.split(" ")[0])}!</h2><p style="opacity:.9">${proj.length} projects in the pipeline. ${ov} overdue, ${dw} due in the next 7 days.</p></div>
 <div class="card"><div class="bar-h"><h3 style="margin:0"> Announcements</h3><button class="p" onclick="addAnn()">+ Announce</button></div>
 ${vis.length?vis.map(a=>`<div class="ann"><b>${esc(a.t)}</b> ${a.ok?"":'<span class="tag w">Pending approval</span>'}<br>${esc(a.x)}<br><span class="mu" style="font-size:12px">by ${esc(a.by)}</span>${!a.ok&&mgr()?` <button class="g" onclick="apr(${a.i},1)">Approve</button><button class="g d" onclick="apr(${a.i},0)">Reject</button>`:""}</div>`).join(""):'<p class="mu">No announcements.</p>'}
 <p class="mu" style="font-size:12px">Anyone can post. Announcements go live after an admin approves.</p></div>
